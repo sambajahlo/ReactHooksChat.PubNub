@@ -5,7 +5,7 @@ import React, { useState, useEffect} from 'react';
 import './App.css';
 
 //This is a hook I created to reduce some of the bloat we get with watching inputs for changes.
-import useInputVariable from './useInputVariable.js';
+import useInput from './useInput.js';
 
 //Lets us import PubNub for our chat infrastructure capabailites.
 import PubNub from 'pubnub';
@@ -32,16 +32,17 @@ function App(){
 
   //Set the states using useState hook,
   //We have our messages, a message adding buffer, our channel,the username, and
-  //temp channel and message using the useInputVariable hook. We access what the
+  //temp channel and message using the useInput hook. We access what the
   //user is currently typing with those hooks.
   const [messages,setMessages] = useState([]);
   const [incMessage, setIncMessage] = useState([]);
   const [channel,setChannel] = useState(defaultChannel);
   const [username,] = useState(['user', new Date().getTime()].join('-'));
 
-  const tempChannel = useInputVariable("");
-  const tempMessage = useInputVariable("");
+  const tempChannel = useInput("");
+  const tempMessage = useInput("");
 
+  //This is where we set up PubNub and handle events that come through. Reruns on channel name update!
   useEffect(()=>{
     console.log("setting up pubnub");
     const pubnub = new PubNub({
@@ -94,17 +95,19 @@ function App(){
     }
   },[channel, username]);
 
+  //Adds in a message to the messages array when we update the  incMessage state.
   useEffect(()=>{
     setMessages(messages => messages.concat(incMessage));
   },[incMessage])
 
+  //Adding back browser button listener
   useEffect(() => {
     window.addEventListener("popstate",goBack);
 
     return function cleanup(){
       window.removeEventListener("popstate",goBack);
     }
-  },[goBack]);
+  },[]);
 
   function handleNewChannel(event){
     if (event.key === 'Enter') {
