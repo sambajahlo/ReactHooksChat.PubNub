@@ -43,10 +43,10 @@ function App(){
   useEffect(()=>{
     console.log("setting up pubnub");
     const pubnub = new PubNub({
-     publishKey: "pub-c-d62180cb-302f-4c84-b05d-6975d2e5634a",
-     subscribeKey: "sub-c-081cd550-75d2-11e9-a9da-06324c5f6dce",
-     uuid: username
-    })
+      publishKey: "<ENTER-PUB-KEY-HERE>",
+      subscribeKey: "<ENTER-SUB-KEY-HERE>",
+      uuid: username
+    });
 
 
     pubnub.addListener({
@@ -84,7 +84,7 @@ function App(){
              text: response.messages[i].entry.text
            });
          }
-         setMessages(messages=>messages.concat(newMessages))
+         setMessages(messages=>messages.concat(newMessages));
        }
      );
     return function cleanup(){
@@ -110,7 +110,7 @@ function App(){
     }else if(event.target.id === "channelInput"){
       if (event.key === 'Enter') {
         //Navigates to new channels
-        const newChannel = tempChannel.value.trim()
+        const newChannel = tempChannel.value.trim();
         if(newChannel){
           if(channel !== newChannel){
             //If the user isnt trying to navigate to the same channel theyre on
@@ -143,15 +143,14 @@ function App(){
      };
 
      const pubnub = new PubNub({
-      //pubnub keys
-      publishKey: "pub-c-d62180cb-302f-4c84-b05d-6975d2e5634a",
-      subscribeKey: "sub-c-081cd550-75d2-11e9-a9da-06324c5f6dce",
-      uuid: username
-     })
+        publishKey: "<ENTER-PUB-KEY-HERE>",
+        subscribeKey: "<ENTER-SUB-KEY-HERE>",
+        uuid: username
+      });
      pubnub.publish({
        message: messageObject,
        channel: channel
-     })
+     });
      tempMessage.setValue('');
    }
  }
