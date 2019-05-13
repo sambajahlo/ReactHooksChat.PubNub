@@ -26,7 +26,7 @@ function App(){
     //If the user input a channel then the default channel is now set
     //If not, we still navigate to the default channel.
     if(pair[0] === "channel" && pair[1] !== ""){
-      defaultChannel = pair[1];
+      defaultChannel = decodeURI(pair[1]);
     }
   }
 
@@ -34,23 +34,20 @@ function App(){
   //We have our messages, a message adding buffer, our channel,the username, and
   //temp channel and message using the useInput hook. We access what the
   //user is currently typing with those hooks.
-  const [messages,setMessages] = useState([]);
-  const [incMessage, setIncMessage] = useState([]);
   const [channel,setChannel] = useState(defaultChannel);
+  const [messages,setMessages] = useState([]);
   const [username,] = useState(['user', new Date().getTime()].join('-'));
-
-  const tempChannel = useInput("");
-  const tempMessage = useInput("");
-
+  const tempChannel = useInput();
+  const tempMessage = useInput();
   //This is where we set up PubNub and handle events that come through. Reruns on channel name update!
   useEffect(()=>{
     console.log("setting up pubnub");
     const pubnub = new PubNub({
-     //pubnub keys
-     publishKey: "pub-c-3d9e1e51-bbaf-4286-847d-199729a3ce5d",
-     subscribeKey: "sub-c-d32fe452-6acf-11e9-b514-6a4d3cd75da8",
+     publishKey: "pub-c-d62180cb-302f-4c84-b05d-6975d2e5634a",
+     subscribeKey: "sub-c-081cd550-75d2-11e9-a9da-06324c5f6dce",
      uuid: username
-   });
+    })
+
 
     pubnub.addListener({
      status: function(statusEvent) {
@@ -59,17 +56,18 @@ function App(){
        }
      },
      message: function(msg) {
-       if(msg.message.text != null){
+       if(msg.message.text){
          console.log(msg.message.text)
-         let newMessage = {
+         let newMessages = [];
+         newMessages.push({
            uuid:msg.message.uuid,
            text: msg.message.text
-         };
-         setIncMessage(newMessage);
+         });
+         setMessages(messages=>messages.concat(newMessages))
        }
      }
    });
-     //Subscribes to the channelName in our state
+     //Subscribes to the channel in our state
      pubnub.subscribe({
          channels: [channel]
      });
@@ -79,13 +77,14 @@ function App(){
          count: 10, // 100 is the default
          stringifiedTimeToken: true // false is the default
      }, function (status, response){
+        let newMessages = [];
          for (let i  = 0; i < response.messages.length;i++){
-           let newMessage = {
+           newMessages.push({
              uuid:response.messages[i].entry.uuid ,
              text: response.messages[i].entry.text
-           };
-           setIncMessage(newMessage);
+           });
          }
+         setMessages(messages=>messages.concat(newMessages))
        }
      );
     return function cleanup(){
@@ -94,12 +93,6 @@ function App(){
       setMessages([]);
     }
   },[channel, username]);
-
-  //Adds in a message to the messages array when we update the  incMessage state.
-  useEffect(()=>{
-    setMessages(messages => messages.concat(incMessage));
-  },[incMessage])
-
   //Adding back browser button listener
   useEffect(() => {
     window.addEventListener("popstate",goBack);
@@ -109,58 +102,60 @@ function App(){
     }
   },[]);
 
-  function handleNewChannel(event){
-    if (event.key === 'Enter') {
-      //Navigates to new channels
-      if(tempChannel.value){
-        if(channel !== tempChannel.value){
-          //If the user isnt trying to navigate to the same channel theyre on
-          setChannel(tempChannel.value);
-          let newURL = window.location.origin + "?channel=" + tempChannel.value;
-          window.history.pushState(null, '',newURL);
-          tempChannel.setValue('');
-        }
-      }else{
-        //If the user didnt put anything into the channel Input
-        if(channel !== "Global"){
-          //If the user isnt trying to navigate to the same channel theyre on
-          setChannel("Global");
-          let newURL = window.location.origin;
-          window.history.pushState(null, '',newURL);
-          tempChannel.setValue('');
+  function handleKeyDown(event){
+    if(event.target.id === "messageInput"){
+      if (event.key === 'Enter') {
+        publishMessage();
+      }
+    }else if(event.target.id === "channelInput"){
+      if (event.key === 'Enter') {
+        //Navigates to new channels
+        const newChannel = tempChannel.value.trim()
+        if(newChannel){
+          if(channel !== newChannel){
+            //If the user isnt trying to navigate to the same channel theyre on
+            setChannel(newChannel);
+            let newURL = window.location.origin + "?channel=" + newChannel;
+            window.history.pushState(null, '',newURL);
+            tempChannel.setValue('');
+          }
+        }else{
+          //If the user didnt put anything into the channel Input
+          if(channel !== "Global"){
+            //If the user isnt trying to navigate to the same channel theyre on
+            setChannel("Global");
+            let newURL = window.location.origin;
+            window.history.pushState(null, '',newURL);
+            tempChannel.setValue('');
+          }
         }
       }
     }
-  }
 
-  function handleNewMessage(event){
-    if (event.key === 'Enter') {
-      publishMessage();
-    }
   }
 
   //Publishing messages via PubNub
-   function publishMessage(){
-    if (tempMessage.value) {
-      let messageObject = {
-        text: tempMessage.value,
-        uuid: username
-      };
-      const pubnub = new PubNub({
-       //pubnub keys
-       publishKey: "pub-c-3d9e1e51-bbaf-4286-847d-199729a3ce5d",
-       subscribeKey: "sub-c-d32fe452-6acf-11e9-b514-6a4d3cd75da8",
+  function publishMessage(){
+   if (tempMessage.value) {
+     let messageObject = {
+       text: tempMessage.value,
        uuid: username
-      })
-      pubnub.publish({
-        message: messageObject,
-        channel: channel
-      })
-      tempMessage.setValue('');
-    }
-  }
+     };
+
+     const pubnub = new PubNub({
+      //pubnub keys
+      publishKey: "pub-c-d62180cb-302f-4c84-b05d-6975d2e5634a",
+      subscribeKey: "sub-c-081cd550-75d2-11e9-a9da-06324c5f6dce",
+      uuid: username
+     })
+     pubnub.publish({
+       message: messageObject,
+       channel: channel
+     })
+     tempMessage.setValue('');
+   }
+ }
   function goBack() {
-    console.log("Clicked back")
     //Access the parameters provided in the URL
     let query = window.location.search.substring(1);
     if(!query){
@@ -172,7 +167,7 @@ function App(){
         //If the user input a channel then the default channel is now set
         //If not, we still navigate to the default channel.
         if(pair[0] === "channel" && pair[1] !== ""){
-            setChannel(pair[1])
+            setChannel(decodeURI(pair[1]))
         }
       }
     }
@@ -191,23 +186,25 @@ function App(){
               <Input
                 style={{width:'100px'}}
                 className="channel"
-                onKeyDown={handleNewChannel}
+                id="channelInput"
+                onKeyDown={handleKeyDown}
                 placeholder ={channel}
                 onChange = {tempChannel.onChange}
                 value={tempChannel.value}
               />
             </div>
             <div >
-              <Log messages={messages} channelName={channel}/>
+              <Log messages={messages}/>
             </div>
           </CardContent>
           <CardActions>
             <Input
               placeholder="Enter a message"
               fullWidth={true}
+              id="messageInput"
               value={tempMessage.value}
               onChange={tempMessage.onChange}
-              onKeyDown={handleNewMessage}
+              onKeyDown={handleKeyDown}
               inputProps={{'aria-label': 'Message Field',}}
               autoFocus={true}
             />
