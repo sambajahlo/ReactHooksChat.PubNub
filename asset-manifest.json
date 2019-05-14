@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/ReactHooksChat.PubNub/static/css/main.e750eda3.chunk.css",
+    "main.css": "/ReactHooksChat.PubNub/static/css/main.12f37309.chunk.css",
     "main.js": "/ReactHooksChat.PubNub/static/js/main.7e93e4d2.chunk.js",
     "main.js.map": "/ReactHooksChat.PubNub/static/js/main.7e93e4d2.chunk.js.map",
     "runtime~main.js": "/ReactHooksChat.PubNub/static/js/runtime~main.29365274.js",
@@ -8,8 +8,8 @@
     "static/js/2.4cefe1ea.chunk.js": "/ReactHooksChat.PubNub/static/js/2.4cefe1ea.chunk.js",
     "static/js/2.4cefe1ea.chunk.js.map": "/ReactHooksChat.PubNub/static/js/2.4cefe1ea.chunk.js.map",
     "index.html": "/ReactHooksChat.PubNub/index.html",
-    "precache-manifest.770918ff37336cc4a96c64e519a05476.js": "/ReactHooksChat.PubNub/precache-manifest.770918ff37336cc4a96c64e519a05476.js",
+    "precache-manifest.51a9476f55c9cf07075fda9d760dda6f.js": "/ReactHooksChat.PubNub/precache-manifest.51a9476f55c9cf07075fda9d760dda6f.js",
     "service-worker.js": "/ReactHooksChat.PubNub/service-worker.js",
-    "static/css/main.e750eda3.chunk.css.map": "/ReactHooksChat.PubNub/static/css/main.e750eda3.chunk.css.map"
+    "static/css/main.12f37309.chunk.css.map": "/ReactHooksChat.PubNub/static/css/main.12f37309.chunk.css.map"
   }
 }
