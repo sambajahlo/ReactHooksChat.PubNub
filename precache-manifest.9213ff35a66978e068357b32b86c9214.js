@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "20b68ca64911762ca48f958f7f6f5386",
+    "revision": "66488d118d90449714828e331bbb2dbd",
     "url": "/ReactHooksChat.PubNub/index.html"
   },
   {
-    "revision": "111565c8d0093cf1be59",
+    "revision": "987d97d7a59e597f565f",
     "url": "/ReactHooksChat.PubNub/static/css/main.3d8be283.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ReactHooksChat.PubNub/static/js/2.4cefe1ea.chunk.js"
   },
   {
-    "revision": "111565c8d0093cf1be59",
-    "url": "/ReactHooksChat.PubNub/static/js/main.120c3cd5.chunk.js"
+    "revision": "987d97d7a59e597f565f",
+    "url": "/ReactHooksChat.PubNub/static/js/main.3ab92102.chunk.js"
   },
   {
     "revision": "95cd9c8d4ad5d0ad1209",
