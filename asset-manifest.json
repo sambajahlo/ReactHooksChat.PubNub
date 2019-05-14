@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ReactHooksChat.PubNub/static/css/main.3d8be283.chunk.css",
-    "main.js": "/ReactHooksChat.PubNub/static/js/main.6ef51876.chunk.js",
-    "main.js.map": "/ReactHooksChat.PubNub/static/js/main.6ef51876.chunk.js.map",
+    "main.css": "/ReactHooksChat.PubNub/static/css/main.9b02eb1d.chunk.css",
+    "main.js": "/ReactHooksChat.PubNub/static/js/main.7e93e4d2.chunk.js",
+    "main.js.map": "/ReactHooksChat.PubNub/static/js/main.7e93e4d2.chunk.js.map",
     "runtime~main.js": "/ReactHooksChat.PubNub/static/js/runtime~main.29365274.js",
     "runtime~main.js.map": "/ReactHooksChat.PubNub/static/js/runtime~main.29365274.js.map",
     "static/js/2.4cefe1ea.chunk.js": "/ReactHooksChat.PubNub/static/js/2.4cefe1ea.chunk.js",
     "static/js/2.4cefe1ea.chunk.js.map": "/ReactHooksChat.PubNub/static/js/2.4cefe1ea.chunk.js.map",
     "index.html": "/ReactHooksChat.PubNub/index.html",
-    "precache-manifest.a711f162c074908c7bcbfe8a4487339c.js": "/ReactHooksChat.PubNub/precache-manifest.a711f162c074908c7bcbfe8a4487339c.js",
+    "precache-manifest.9a9a9de1dc38a1e978f7ef1ac2585f5e.js": "/ReactHooksChat.PubNub/precache-manifest.9a9a9de1dc38a1e978f7ef1ac2585f5e.js",
     "service-worker.js": "/ReactHooksChat.PubNub/service-worker.js",
-    "static/css/main.3d8be283.chunk.css.map": "/ReactHooksChat.PubNub/static/css/main.3d8be283.chunk.css.map"
+    "static/css/main.9b02eb1d.chunk.css.map": "/ReactHooksChat.PubNub/static/css/main.9b02eb1d.chunk.css.map"
   }
 }

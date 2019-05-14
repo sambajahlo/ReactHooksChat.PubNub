@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f2fb47add4e8058d71ddf20bce9fc765",
+    "revision": "537f4fb0aa1956b8ede0ae70cc8a6b7e",
     "url": "/ReactHooksChat.PubNub/index.html"
   },
   {
-    "revision": "aa99c1dcf4633e258643",
-    "url": "/ReactHooksChat.PubNub/static/css/main.3d8be283.chunk.css"
+    "revision": "7dbb487b8191e53cba36",
+    "url": "/ReactHooksChat.PubNub/static/css/main.9b02eb1d.chunk.css"
   },
   {
     "revision": "c0da83228ad1fb2e31be",
     "url": "/ReactHooksChat.PubNub/static/js/2.4cefe1ea.chunk.js"
   },
   {
-    "revision": "aa99c1dcf4633e258643",
-    "url": "/ReactHooksChat.PubNub/static/js/main.6ef51876.chunk.js"
+    "revision": "7dbb487b8191e53cba36",
+    "url": "/ReactHooksChat.PubNub/static/js/main.7e93e4d2.chunk.js"
   },
   {
     "revision": "95cd9c8d4ad5d0ad1209",
