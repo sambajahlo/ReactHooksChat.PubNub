@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ReactHooksChat.PubNub/precache-manifest.2d5bcd8402fa07547f9b697772158f0b.js"
+  "/ReactHooksChat.PubNub/precache-manifest.826d0daa5453f9857e4f6fbcaedf6219.js"
 );
 
 self.addEventListener('message', (event) => {
